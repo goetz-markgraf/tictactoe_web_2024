@@ -1,9 +1,9 @@
 package tictactoe.helloworld
 
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Repository
 
-@Service
-class NameService {
+@Repository
+class NameRepository {
     private var name: String = ""
 
     fun getName(): String {
