@@ -1,4 +1,4 @@
-package org.example.tictactoe_web_2024
+package tictactoe
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,0 +1,12 @@
+{{>header}}
+
+<h1>Tic Tac Toe</h1>
+<p>Message from Controller: {{message}}</p>
+
+<form action="/setname" method="post">
+    <p>Set your name:</p>
+    <input type="text" name="name" />
+    <input type="submit" value="Submit" />
+</form>
+
+{{>footer}}
