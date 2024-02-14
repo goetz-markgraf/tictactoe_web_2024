@@ -1,4 +1,4 @@
-package tictactoe.helloworld
+package tictactoe.name
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
-class HelloWorldController(
+class NameController(
     private val nameRepository: NameRepository
 ) {
 
-    @GetMapping("/")
+    @GetMapping("/name")
     fun helloWorld(model: Model): String {
         model.addAttribute("message", "Hello, World!")
 
@@ -18,7 +18,7 @@ class HelloWorldController(
             model.addAttribute("savedName", nameRepository.getName())
         }
 
-        return "index"
+        return "name"
     }
 
     @PostMapping("/setname")

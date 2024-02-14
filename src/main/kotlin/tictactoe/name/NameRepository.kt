@@ -1,4 +1,4 @@
-package tictactoe.helloworld
+package tictactoe.name
 
 import org.springframework.stereotype.Repository
 
