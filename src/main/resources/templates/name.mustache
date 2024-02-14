@@ -1,7 +1,6 @@
 {{>_header}}
 
 <h1>Tic Tac Toe</h1>
-<p>Message from Controller: {{message}}</p>
 
 {{#savedName}}
     <p>Your name is: {{savedName}}</p>
@@ -9,8 +8,8 @@
 
 <form action="/setname" method="post">
     <p>Set your name:</p>
-    <input type="text" name="name" />
-    <input type="submit" value="Submit" />
+    <input type="text" name="name"/>
+    <input type="submit" value="Submit"/>
 </form>
 
 {{>_footer}}

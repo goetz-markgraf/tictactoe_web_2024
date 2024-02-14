@@ -12,8 +12,6 @@ class NameController(
 
     @GetMapping("/name")
     fun helloWorld(model: Model): String {
-        model.addAttribute("message", "Hello, World!")
-
         if (nameRepository.getName().isNotEmpty()) {
             model.addAttribute("savedName", nameRepository.getName())
         }
