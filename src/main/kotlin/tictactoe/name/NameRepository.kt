@@ -4,13 +4,22 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class NameRepository {
-    private var name: String = ""
+    private var nameX: String = ""
+    private var nameO: String = ""
 
-    fun getName(): String {
-        return name
+    fun getNameX(): String {
+        return nameX
     }
 
-    fun setName(name: String) {
-        this.name = name
+    fun getNameO(): String {
+        return nameO
+    }
+
+    fun setNameX(nameX: String) {
+        this.nameX = nameX
+    }
+
+    fun setNameO(nameO: String) {
+        this.nameO = nameO
     }
 }

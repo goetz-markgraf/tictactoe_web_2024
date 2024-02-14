@@ -12,21 +12,25 @@ class NameController(
 
     @GetMapping("/name")
     fun helloWorld(model: Model): String {
-        if (nameRepository.getName().isNotEmpty()) {
-            model.addAttribute("savedName", nameRepository.getName())
+
+        if (nameRepository.getNameX().isNotEmpty()) {
+            model.addAttribute("savedName", nameRepository.getNameX())
+        } else if (nameRepository.getNameO().isNotEmpty()){
+            model.addAttribute("savedName", nameRepository.getNameO())
         }
 
         return "name"
     }
 
     @PostMapping("/setname")
-    fun setName(model: Model, name: String): String {
-        nameRepository.setName(name)
+    fun setName(model: Model, nameX: String, nameO: String): String {
 
-        if (name.isEmpty()) {
-            model.addAttribute("name", "man without a name")
-        } else {
-            model.addAttribute("name", nameRepository.getName())
+        if (nameX.isNotEmpty() && nameO.isNotEmpty()) {
+            model.addAttribute("name", nameRepository.getNameX())
+            model.addAttribute("name", nameRepository.getNameO())
+        }
+        else if (nameX.isEmpty() && nameO.isEmpty()) {
+            model.addAttribute("name", "noname")
         }
 
         return "greeting"
