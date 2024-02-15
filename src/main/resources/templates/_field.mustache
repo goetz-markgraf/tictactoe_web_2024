@@ -1,0 +1,66 @@
+<div id="vertical"></div>
+<div id="horizontal"></div>
+<div id="current_turn">current turn</div>
+<div class="circle"></div>
+<div class="cross1"></div>
+<div class="cross2"></div>
+
+<style>
+    #vertical {
+        position: absolute;
+        width: 100px;
+        height: 300px;
+        top: 200px;
+        left: 150px;
+        border-left: 1px solid #000000;
+        border-right: 1px solid #000000;
+    }
+
+    #horizontal {
+        position: absolute;
+        width: 300px;
+        height: 100px;
+        top: 300px;
+        left: 50px;
+        border-top: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+    }
+
+    #current_turn {
+        position: absolute;
+        width: 100px;
+        height: 120px;
+        border: 2px solid #000000;
+        text-align: center;
+    }
+
+    .circle {
+        position: absolute;
+        width: 84px;
+        height: 84px;
+        left: 15px;
+        top: 35px;
+        border-radius: 50%;
+        border: 3px solid #00ffff;
+    }
+
+    .cross1 {
+        position: absolute;
+        left: -3px;
+        top: 79px;
+        width: 126px;
+        height: 2px;
+        background-color: #ff0000;
+        transform:rotate(45deg);
+    }
+
+    .cross2 {
+        position: absolute;
+        left: -3px;
+        top: 79px;
+        width: 126px;
+        height: 2px;
+        background-color: #ff0000;
+        transform:rotate(-45deg);
+    }
+</style>
