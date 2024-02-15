@@ -48,10 +48,23 @@ class GameController(
     }
 
 @GetMapping("/checkTurnX")
-    fun checkTurnX(model: Model): String{
+    fun checkTurnX(model: Model): Any {
         if(gameRepository.turn == Player.X){
-           return placeX()
+           return "placeX"
         }
         return "waitX"
     }
-
+@PostMapping("/placeX")
+    fun placeX(model: Model, cell: Int, player: Player):List<Char> {
+        if (cell in 1..9 ) {
+            if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
+                val newField = gameRepository.field.toMutableList()
+                newField[cell - 1] = if (player == Player.X) 'X' else 'O'
+                return newField
+            } else {
+                return gameRepository.field
+            }
+        } else {
+            return gameRepository.field
+        }
+}
