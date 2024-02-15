@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping
 class HelloWorldController {
     @GetMapping("/")
     fun helloWorld(model: Model): String {
-        model.addAttribute("message", "Hello, World!")
+        model.addAttribute("message", "Hallo Spieler!")
 
         return "index"
     }

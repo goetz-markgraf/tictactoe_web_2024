@@ -46,4 +46,12 @@ class GameController(
 
         return "error"
     }
-}
+
+@GetMapping("/checkTurnX")
+    fun checkTurnX(model: Model): String{
+        if(gameRepository.turn == Player.X){
+           return placeX()
+        }
+        return "waitX"
+    }
+
