@@ -7,8 +7,6 @@ enum class Player {
     X, O
 }
 
-
-
 @Repository
 class GameRepository {
 
@@ -16,7 +14,6 @@ class GameRepository {
     var nameO: String = ""
     var turn: Player? = null
     var field = listOf('1', '2', '3', '4', '5', '6', '7', '8', '9')
-
 
     fun fillModel(model: Model) {
         model.addAttribute("field1", field[0])
