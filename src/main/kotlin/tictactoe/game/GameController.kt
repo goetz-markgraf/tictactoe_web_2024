@@ -10,8 +10,8 @@ class GameController(
     private val gameRepository: GameRepository
 ) {
 
-    @GetMapping("/tictactoe")
-    fun helloWorld(model: Model): String {
+    @GetMapping("/")
+    fun index(model: Model): String {
 
         if (gameRepository.nameX.isEmpty()) {
             return "askNameX"
@@ -139,7 +139,7 @@ class GameController(
 
 
     @GetMapping("/reset")
-    fun reset(model: Model, ): String {
+    fun reset(model: Model): String {
         gameRepository.nameX = ""
         gameRepository.nameO = ""
         gameRepository.turn = null
