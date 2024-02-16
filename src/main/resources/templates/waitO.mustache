@@ -1,5 +1,12 @@
 {{>_header}}
 
+{{>_field}}
+
 <p>Hello, {{name}}, we wait for player X.</p>
+
+<form action="/checkTurnO" method="get">
+    <p>Are you ready?</p>
+    <input type="submit" value="check"/>
+</form>
 
 {{>_footer}}

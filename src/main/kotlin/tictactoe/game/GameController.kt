@@ -14,9 +14,9 @@ class GameController(
     fun helloWorld(model: Model): String {
 
         if (gameRepository.nameX.isEmpty()) {
-            return "questionNameX"
+            return "askNameX"
         } else if (gameRepository.nameO.isEmpty()) {
-            return "questionNameO"
+            return "askNameO"
         }
 
         return "gameRunning"
@@ -50,25 +50,52 @@ class GameController(
     @GetMapping("/checkTurnX")
     fun checkTurnX(model: Model): String {
         model.addAttribute("name", gameRepository.nameX)
-        if (gameRepository.turn == Player.X) {
-            return "placeX"
+        return if (gameRepository.turn == Player.X) {
+            "placeX"
         } else {
-            return "waitX"
+            "waitX"
         }
     }
 
     @PostMapping("/placeX")
     fun placeX(model: Model, cell: Int): String {
-        // check if it is player X's turn
 
+        model.addAttribute("name", gameRepository.nameX)
         if (cell in 1..9) {
             if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
                 val newField = gameRepository.field.toMutableList()
                 newField[cell - 1] = 'X'
                 gameRepository.field = newField
+                return "waitX"
             }
         }
 
-        return "waitX"
+        return "placeX"
+    }
+
+    @GetMapping("/checkTurnO")
+    fun checkTurnO(model: Model): String {
+        model.addAttribute("name", gameRepository.nameX)
+        return if (gameRepository.turn == Player.X) {
+            "placeO"
+        } else {
+            "waitO"
+        }
+    }
+
+    @PostMapping("/placeO")
+    fun placeO(model: Model, cell: Int): String {
+
+        model.addAttribute("name", gameRepository.nameO)
+        if (cell in 1..9) {
+            if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
+                val newField = gameRepository.field.toMutableList()
+                newField[cell - 1] = 'O'
+                gameRepository.field = newField
+                return "waitO"
+            }
+        }
+
+        return "placeO"
     }
 }
