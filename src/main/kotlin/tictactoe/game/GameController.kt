@@ -49,6 +49,7 @@ class GameController(
 
     @GetMapping("/checkTurnX")
     fun checkTurnX(model: Model): String {
+
         model.addAttribute("name", gameRepository.nameX)
         return if (gameRepository.turn == Player.X) {
             "placeX"
@@ -58,15 +59,20 @@ class GameController(
     }
 
     @PostMapping("/placeX")
-    fun placeX(model: Model, cell: Int): String {
+    fun placeX(model: Model, input: String?): String {
 
         model.addAttribute("name", gameRepository.nameX)
+        if(input == null){
+            return "placeX"
+        }
+        val cell = input.toIntOrNull() ?: return "placeX"
         if (cell in 1..9) {
             if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
                 val newField = gameRepository.field.toMutableList()
                 newField[cell - 1] = 'X'
                 gameRepository.field = newField
-                return "waitX"
+                gameRepository.turn = Player.O
+                return "waitO"
             }
         }
 
@@ -76,7 +82,7 @@ class GameController(
     @GetMapping("/checkTurnO")
     fun checkTurnO(model: Model): String {
         model.addAttribute("name", gameRepository.nameX)
-        return if (gameRepository.turn == Player.X) {
+        return if (gameRepository.turn == Player.O) {
             "placeO"
         } else {
             "waitO"
@@ -84,15 +90,20 @@ class GameController(
     }
 
     @PostMapping("/placeO")
-    fun placeO(model: Model, cell: Int): String {
+    fun placeO(model: Model, input: String?): String {
 
         model.addAttribute("name", gameRepository.nameO)
+        if(input == null){
+            return "placeO"
+        }
+        val cell = input.toIntOrNull() ?: return "placeO"
         if (cell in 1..9) {
             if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
                 val newField = gameRepository.field.toMutableList()
                 newField[cell - 1] = 'O'
                 gameRepository.field = newField
-                return "waitO"
+                gameRepository.turn = Player.X
+                return "waitX"
             }
         }
 
