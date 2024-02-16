@@ -1,8 +1,12 @@
 {{>_header}}
 
-{{>_field}}
-
 <p>Hello, {{name}}</p>
+
+{{#message}}
+    <p>{{message}}</p>
+{{/message}}
+
+{{>_field2}}
 
 <form action="placeX" method="post">
     <p>Enter your move: </p>

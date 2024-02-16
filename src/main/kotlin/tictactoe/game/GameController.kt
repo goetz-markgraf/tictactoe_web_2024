@@ -55,6 +55,8 @@ class GameController(
     fun checkTurnX(model: Model): String {
 
         model.addAttribute("name", gameRepository.nameX)
+        gameRepository.fillModel(model)
+
         return if (gameRepository.turn == Player.X) {
             "placeX"
         } else {
@@ -66,11 +68,16 @@ class GameController(
     fun placeX(model: Model, input: String?): String {
 
         model.addAttribute("name", gameRepository.nameX)
+        gameRepository.fillModel(model)
 
         if (input == null) {
             return "placeX"
         }
-        val cell = input.toIntOrNull() ?: return "placeX"
+        val cell = input.toIntOrNull()
+
+        if (cell == null) {
+            return "placeX"
+        }
 
         if (cell in 1..9) {
             if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
@@ -78,7 +85,10 @@ class GameController(
                 newField[cell - 1] = 'X'
                 gameRepository.field = newField
                 gameRepository.turn = Player.O
+                gameRepository.fillModel(model)
                 return "waitX"
+            } else {
+                return "placeX"
             }
         }
 
@@ -88,6 +98,7 @@ class GameController(
     @GetMapping("/checkTurnO")
     fun checkTurnO(model: Model): String {
         model.addAttribute("name", gameRepository.nameO)
+        gameRepository.fillModel(model)
         return if (gameRepository.turn == Player.O) {
             "placeO"
         } else {
@@ -99,17 +110,27 @@ class GameController(
     fun placeO(model: Model, input: String?): String {
 
         model.addAttribute("name", gameRepository.nameO)
+        gameRepository.fillModel(model)
+
         if (input == null) {
             return "placeO"
         }
-        val cell = input.toIntOrNull() ?: return "placeO"
+        val cell = input.toIntOrNull()
+
+        if (cell == null) {
+            return "placeO"
+        }
+
         if (cell in 1..9) {
             if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
                 val newField = gameRepository.field.toMutableList()
                 newField[cell - 1] = 'O'
                 gameRepository.field = newField
                 gameRepository.turn = Player.X
+                gameRepository.fillModel(model)
                 return "waitO"
+            } else {
+                return "placeO"
             }
         }
 
