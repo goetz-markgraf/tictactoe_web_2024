@@ -84,8 +84,8 @@ class GameController(
                 val newField = gameRepository.field.toMutableList()
                 newField[cell - 1] = 'X'
                 gameRepository.field = newField
-                gameRepository.turn = Player.O
                 gameRepository.fillModel(model)
+                gameRepository.turn = Player.O
                 return "waitX"
             } else {
                 return "placeX"
@@ -137,25 +137,6 @@ class GameController(
         return "placeO"
     }
 
-    @GetMapping("/checkWin")
-    fun check(model: Model, player: Player) {
-        val symbol = if (player == Player.X) 'X' else 'O'
-
-        if (gameRepository.field[0] == symbol && gameRepository.field[1] == symbol && gameRepository.field[2] == symbol ||
-            gameRepository.field[3] == symbol && gameRepository.field[4] == symbol && gameRepository.field[5] == symbol ||
-            gameRepository.field[6] == symbol && gameRepository.field[7] == symbol && gameRepository.field[8] == symbol ||
-            gameRepository.field[0] == symbol && gameRepository.field[3] == symbol && gameRepository.field[6] == symbol ||
-            gameRepository.field[1] == symbol && gameRepository.field[4] == symbol && gameRepository.field[7] == symbol ||
-            gameRepository.field[2] == symbol && gameRepository.field[5] == symbol && gameRepository.field[8] == symbol ||
-            gameRepository.field[0] == symbol && gameRepository.field[4] == symbol && gameRepository.field[8] == symbol ||
-            gameRepository.field[2] == symbol && gameRepository.field[4] == symbol && gameRepository.field[6] == symbol
-        ) {
-            val winner = if (symbol == 'X') Player.X else Player.O
-            model.addAttribute("winner", winner)
-        } else {
-            model.addAttribute("tie", "tie")
-        }
-    }
 
     @GetMapping("/reset")
     fun reset(model: Model, ): String {
