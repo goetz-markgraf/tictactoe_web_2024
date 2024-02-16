@@ -31,7 +31,11 @@ class GameController(
             return "waitX"
         }
 
-        return "error"
+        if (gameRepository.nameO.isEmpty()) {
+            return "askNameO"
+        }
+
+        return "gameRunning"
     }
 
     @PostMapping("/setnameO")
@@ -44,7 +48,7 @@ class GameController(
             return "waitO"
         }
 
-        return "error"
+        return "gameRunning"
     }
 
     @GetMapping("/checkTurnX")
@@ -62,17 +66,19 @@ class GameController(
     fun placeX(model: Model, input: String?): String {
 
         model.addAttribute("name", gameRepository.nameX)
-        if(input == null){
+
+        if (input == null) {
             return "placeX"
         }
         val cell = input.toIntOrNull() ?: return "placeX"
+
         if (cell in 1..9) {
             if (gameRepository.field[cell - 1] !in listOf('X', 'O')) {
                 val newField = gameRepository.field.toMutableList()
                 newField[cell - 1] = 'X'
                 gameRepository.field = newField
                 gameRepository.turn = Player.O
-                return "waitO"
+                return "waitX"
             }
         }
 
@@ -81,7 +87,7 @@ class GameController(
 
     @GetMapping("/checkTurnO")
     fun checkTurnO(model: Model): String {
-        model.addAttribute("name", gameRepository.nameX)
+        model.addAttribute("name", gameRepository.nameO)
         return if (gameRepository.turn == Player.O) {
             "placeO"
         } else {
@@ -93,7 +99,7 @@ class GameController(
     fun placeO(model: Model, input: String?): String {
 
         model.addAttribute("name", gameRepository.nameO)
-        if(input == null){
+        if (input == null) {
             return "placeO"
         }
         val cell = input.toIntOrNull() ?: return "placeO"
@@ -103,7 +109,7 @@ class GameController(
                 newField[cell - 1] = 'O'
                 gameRepository.field = newField
                 gameRepository.turn = Player.X
-                return "waitX"
+                return "waitO"
             }
         }
 
